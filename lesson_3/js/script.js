@@ -1,70 +1,88 @@
-let sum = prompt('Ваш бюджет?', '');
-let name = prompt('Название вашего магазина?', '');
-let time = 15;
+let sum,
+		name,
+		time,
+		price;
+
+
+//Функция для определения первичных данных: бюджет на 1 мес., название магазина, время
+function start() {
+	
+	while (isNaN(sum) || sum == '' || sum == null) {
+		sum = prompt('Ваш бюджет?', '');
+	}
+
+	name = prompt('Название вашего магазина?', '').toUpperCase();
+	time = 15;
+}
+
+start();
 
 let mainList = {
 	budget: sum,
 	shopName: name, 
 	shopGoods: [],
-	employers: {},
-	open: false
+	employees: {},
+	open: false,
+	discount: false
 };
 
-for ( let i = 0; i < 5; i++ ) {
+//Функция для определения типов товара
+function chooseGoods() {
+	for ( let i = 0; i < 5; i++ ) {
 
-	let a = prompt('Какой тип товаров будем продавать?', '');
+		let a = prompt('Какой тип товаров будем продавать?', '');
 
-	if ( typeof(a) === 'string' && typeof(a) !== null && a != '' && a.length < 50 ) {
-		console.log('Все верно!');
-		mainList.shopGoods[i] = a;
-	} else {
-		alert('Данные введены неверно! Попробуйте еще раз');
-		i--;
+		if ( typeof(a) === 'string' && typeof(a) !== null && a != '' && a.length < 50 ) {
+			console.log('Все верно!');
+			mainList.shopGoods[i] = a;
+		} else {
+			alert('Данные введены неверно! Попробуйте еще раз');
+			i--;
+		}
 	}
-
 }
 
-/*
-let i = 0;
+chooseGoods();
 
-while (i < 5) {
+//Функция определения рабочего времени
+function workTime(time) {
+	if (time < 0) {
+		console.log('Такого просто не может быть!');
+	} else if (time > 8 && time < 20) {
+		console.log('Время работать!')
+		} else if (time < 24) {
+			console.log('Уже слишком поздно!')
+			} else {
+				console.log('В сутках только 24 часа!')
+				}
+}
 
-	let a = prompt('Какой тип товаров будем продавать?', '');
+workTime(1);
 
-	if ( typeof(a) === 'string' && typeof(a) !== null && a != '' && a.length < 50 ) {
-		console.log('Все верно!');
-		mainList.shopGoods[i] = a;
-		i++;
-	} else {
-		alert('Данные введены неверно! Попробуйте еще раз');
+//Функция расчета ежедневного бюджета
+function calcDailyBudget() {
+	alert(  'Бюджет на 1 день: ' + mainList.budget / 30 );
+}
+
+calcDailyBudget();
+
+//Функция расчета дисконта
+function calcDiscount() {
+	if (mainList.discount) {
+		price *= 0.8;
 	}
+}
 
-}*/
+calcDiscount();
 
-/*
-do {
-	let a = prompt('Какой тип товаров будем продавать?', '');
+//Функция найма сотрудников
+function hireEmployees() {
+  for (let i = 1; i < 5; i++) {
+    let name = prompt('Имя сотрудника', '');
+    mainList.employees[i] = name;
+  }
+}
 
-	if ( typeof(a) === 'string' && typeof(a) !== null && a != '' && a.length < 50 ) {
-		console.log('Все верно!');
-		mainList.shopGoods[i] = a;
-		i++;
-	} else {
-		alert('Данные введены неверно! Попробуйте еще раз');
-	}
-} while (i < 5);
-*/
-
-if (time < 0) {
-	console.log('Такого просто не может быть!');
-} else if (time > 8 && time < 20) {
-	console.log('Время работать!')
-} else if (time < 24) {
-	console.log('Уже слишком поздно!')
-} else {
-	console.log('В сутках только 24 часа!')
-};
-
-alert(  'Бюджет на 1 день: ' + mainList.budget / 30 );
+hireEmployees();
 
 console.log(mainList);
