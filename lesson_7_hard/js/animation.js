@@ -28,7 +28,7 @@ var mainBlock = document.querySelector('.main-block');
 mainBlock.style.position = 'relative';
 var quadOut = makeEaseOut(quad);
   
-window.addEventListener('DOMContentLoaded', function myClick() {
+mainBlock.addEventListener('click', function myClick() {
   var myTime = 2000;
   animate({ 
     duration: myTime,
