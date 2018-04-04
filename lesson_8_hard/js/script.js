@@ -115,7 +115,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function circ(timeFraction) {
-	  return 1 - Math.sin(Math.acos(timeFraction))
+		return 1 - Math.sin(Math.acos(timeFraction))
 	}
 
 	function makeEaseOut(timing) {
@@ -128,20 +128,20 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	let menu = document.querySelector('nav ul');
 		
-		menu.addEventListener('click', function(e) {
-			let li = e.target.closest('li');
-			e.preventDefault();
-				if (li) {
-					let myTime = 2000;
-					let elem = document.querySelector(e.target.getAttribute('href'));
-					animate({ 
-						duration: myTime,
-						timing: circEaseOut,
-						draw: function(progress) {
-							window.scrollBy(0, (progress * elem.getBoundingClientRect().top - menu.offsetHeight));
-						}
-					})
-				};
-		});
+	menu.addEventListener('click', function(e) {
+		let li = e.target.closest('li');
+		e.preventDefault();
+			if (li) {
+				let myTime = 2000;
+				let elem = document.querySelector(e.target.getAttribute('href'));
+				animate({ 
+					duration: myTime,
+					timing: circEaseOut,
+					draw: function(progress) {
+						window.scrollBy(0, (progress * elem.getBoundingClientRect().top - menu.offsetHeight));
+					}
+				});
+			};
+	});
 });
 
