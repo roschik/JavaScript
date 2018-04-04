@@ -39,16 +39,25 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	function getTimeRemaning(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
-				seconds = Math.floor( (t/1000) % 60 ),
-				minutes = Math.floor( (t/1000/60) % 60 ),
-				hours = Math.floor( t/(1000*60*60) );
+				seconds,
+				minutes,
+				hours;
+				if (t <= 0) {
+					seconds = 0;
+					minutes = 0;
+					hours = 0;
+				} else {
+					seconds = Math.floor( (t/1000) % 60 );
+					minutes = Math.floor( (t/1000/60) % 60 );
+					hours = Math.floor( t/(1000*60*60) );
+				}
 
 		return {
 			'total': t,
 			'hours': hours,
 			'minutes': minutes,
 			'seconds': seconds
-		};
+		}
 	};
 
 	// Функция для добавления нуля спереди, если число меньше 10
@@ -75,9 +84,6 @@ window.addEventListener('DOMContentLoaded', function() {
 			seconds.innerHTML = getZero(t.seconds);
 
 			if (t.total <= 0) {
-				hours.innerHTML = '00';
-				minutes.innerHTML = '00';
-				seconds.innerHTML = '00';
 				clearInterval(timeInterval);
 			}
 
@@ -108,16 +114,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	function bounce(timeFraction) {
-		for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
-			if (timeFraction >= (7 - 4 * a) / 11) {
-				return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
-			}
-		}
-	}
 	function circ(timeFraction) {
-  return 1 - Math.sin(Math.acos(timeFraction))
-}
+	  return 1 - Math.sin(Math.acos(timeFraction))
+	}
 
 	function makeEaseOut(timing) {
 		return function(timeFraction) {
@@ -142,7 +141,6 @@ window.addEventListener('DOMContentLoaded', function() {
 							window.scrollBy(0, (progress * elem.getBoundingClientRect().top - menu.offsetHeight));
 						}
 					})
-		
 				};
 		});
 });

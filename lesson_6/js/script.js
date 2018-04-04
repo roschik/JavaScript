@@ -95,8 +95,6 @@ employersBtn.addEventListener('click', () => {
 });
 
 
-
-
 let mainList = {
 		budget: sum,
 		shopName: name, 
