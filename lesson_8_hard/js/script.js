@@ -89,7 +89,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		};
 
-		updateClock();
 		let timeInterval = setInterval(updateClock, 1000);
 
 	};
@@ -97,34 +96,23 @@ window.addEventListener('DOMContentLoaded', function() {
 	setClock('timer', deadline);
 
 	//Плавный скролл
-	function animate(options) {
-		let start = performance.now();
-		
-		requestAnimationFrame(function animate(time) {
-			let timeFraction = (time - start) / options.duration;
-			if (timeFraction > 1) timeFraction = 1;
-
-			let progress = options.timing(timeFraction)
-
+	function animate(options){
+		var start = performance.now();
+			
+		requestAnimationFrame(function animation(time){
+			var timeFraction = (time - start) / options.duration;
+			if(timeFraction > 1) timeFraction = 1;
+				
+			var progress = options.timing(timeFraction);
 			options.draw(progress);
-
-			if (timeFraction < 1) {
-				requestAnimationFrame(animate);
-			}
+				
+			if(progress < 1) requestAnimationFrame(animation);
 		});
-	}
+	};
 
-	function circ(timeFraction) {
-		return 1 - Math.sin(Math.acos(timeFraction))
+	function quad(progress) {
+	  return Math.pow(progress, 2)
 	}
-
-	function makeEaseOut(timing) {
-		return function(timeFraction) {
-			return 1 - timing(1 - timeFraction);
-		}
-	}
-
-	var circEaseOut = makeEaseOut(circ);
 
 	let menu = document.querySelector('nav ul');
 		
@@ -132,13 +120,13 @@ window.addEventListener('DOMContentLoaded', function() {
 		let li = e.target.closest('li');
 		e.preventDefault();
 			if (li) {
-				let myTime = 2000;
+				let myTime = 1500;
 				let elem = document.querySelector(e.target.getAttribute('href'));
 				animate({ 
 					duration: myTime,
-					timing: circEaseOut,
+					timing: quad,
 					draw: function(progress) {
-						window.scrollBy(0, (progress * elem.getBoundingClientRect().top - menu.offsetHeight));
+						window.scrollBy(0, (progress *( elem.getBoundingClientRect().top - menu.offsetHeight)));
 					}
 				});
 			};
