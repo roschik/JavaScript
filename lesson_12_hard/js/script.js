@@ -43,7 +43,6 @@ $(document).ready(function() {
 				bottom: 'swing'
 			}
 		});
-		$('.thanks').hide();
 	}
 
 	function hideThanks() {
@@ -62,7 +61,22 @@ $(document).ready(function() {
 			data: data,
 		})
 		.done(function() {
-			$('.modal').hide(500);
+			$('.modal').animate({
+				opacity: 'toggle',
+				height: 'hide',
+				width: 'hide',
+				marginLeft: 0,
+				bottom: 0
+			}, {
+				duration: 600, 
+				specialEasing: {
+					opacity: 'linear',
+					height: 'swing',
+					width: 'swing',
+					marginLeft: 'swing',
+					bottom: 'swing'
+				}
+			});
 			$('.thanks').show(800);
 			$('input').val('');
 			$('.checkbox').prop('checked', false);
@@ -73,4 +87,3 @@ $(document).ready(function() {
 	});
 
 });
-  
