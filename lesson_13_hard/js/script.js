@@ -320,9 +320,9 @@ window.addEventListener('DOMContentLoaded', function() {
 				personsSum = parseInt(this.value);
 				this.value = personsSum;
 				total = (daysSum + personsSum)*4000;
-				
+
 				animate({ 
-					duration: 500,
+					duration: 400,
 					timing: linear,
 					draw: function(progress) {
 						if (restDays.value == '' || persons.value == '' || restDays.value <= 0 || persons.value <= 0) {
@@ -341,7 +341,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				total = (daysSum + personsSum)*4000;
 
 				animate({ 
-					duration: 500,
+					duration: 400,
 					timing: linear,
 					draw: function(progress) {
 						if (restDays.value == '' || persons.value == '' || restDays.value <= 0 || persons.value <= 0) {
@@ -356,7 +356,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 			place.addEventListener('change', function() {
 				animate({ 
-					duration: 500,
+					duration: 400,
 					timing: linear,
 					draw: function(progress) {
 						if (restDays.value == '' || persons.value == '' || restDays.value <= 0 || persons.value <= 0) {
