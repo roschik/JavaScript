@@ -1,6 +1,6 @@
 describe('sum', ()=> {
 	it('Возвращает тип данных True', () => {
-		assert.isTrue(sum(2,2));
+		assert.typeOf(sum(2,2), 'boolean')
 	});
 });
 
@@ -17,7 +17,7 @@ describe('each', () => {
 	it('Возвращает [8,7,6,5,4]', () => {
 		assert.deepEqual(each(array, myFunc), [ 8, 7, 6, 5, 4 ])
 	})
-	it('Длина значения Each равна 2', () => {
-		assert.lengthOf(each, 2);
+	it('Длина возвращаемого значения Each равна 5', () => {
+		assert.lengthOf(each(array, myFunc), 5);
 	});
 });
