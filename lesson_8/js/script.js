@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		};
 
-		updateClock();
+		
 		let timeInterval = setInterval(updateClock, 1000);
 
 	};
